@@ -1,0 +1,20 @@
+{
+  "name": "portfolio-rebalancer",
+  "version": "1.0.0",
+  "description": "A tool in JavaScript that calculates the rebalancing of an investment portfolio based on new aportions, assisting in maintaining the desired asset allocation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatheusPMello/portfolio-rebalancer-js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MatheusPMello/portfolio-rebalancer-js/issues"
+  },
+  "homepage": "https://github.com/MatheusPMello/portfolio-rebalancer-js#readme"
+}
