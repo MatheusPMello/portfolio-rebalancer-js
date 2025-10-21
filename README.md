@@ -73,19 +73,20 @@ const minhaCarteira = [
 const meuAporte = 2000;
 
 // ... the rest of the code ...
+```
 
-🧠 Calculation Logic
+## 🧠 Calculation Logic
 The algorithm follows these steps:
 
-Calculate New Total: Sums the valorTotalAtual (Current Total Value) with the valorDoAporte (Contribution Amount).
+* Calculate New Total: Sums the valorTotalAtual (Current Total Value) with the valorDoAporte (Contribution Amount).
 
-Identify Deficit: For each asset, it calculates its valorObjetivo (Target Value) (e.g., 50% of the new total). Then, it subtracts the valorAtual (Current Value) to find the "missing amount".
+* Identify Deficit: For each asset, it calculates its valorObjetivo (Target Value) (e.g., 50% of the new total). Then, it subtracts the valorAtual (Current Value) to find the "missing amount".
 
-Ignore Over-Allocated: If an asset has already exceeded its target (missing amount < 0), it is set to zero and will not receive any contribution.
+* Ignore Over-Allocated: If an asset has already exceeded its target (missing amount < 0), it is set to zero and will not receive any contribution.
 
-Calculate Proportion: The script sums all "missing amounts" (only from assets in deficit) to get a totalAFinanciar (Total to Finance).
+* Calculate Proportion: The script sums all "missing amounts" (only from assets in deficit) to get a totalAFinanciar (Total to Finance).
 
-Distribute Contribution: The valorDoAporte is divided among the assets in deficit, proportional to the "weight" that each asset's "missing amount" has in the totalAFinanciar.
+* Distribute Contribution: The valorDoAporte is divided among the assets in deficit, proportional to the "weight" that each asset's "missing amount" has in the totalAFinanciar.
 
-📜 License
+## 📜 License
 Distributed under the MIT License. See the LICENSE file for more information.
