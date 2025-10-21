@@ -44,3 +44,48 @@ You will need [Node.js](https://nodejs.org/) installed on your machine.
 ## 📋 Example Output
 
 When running the `index.js` script with the sample data, you will see this output in your terminal:
+| nomeInvestimento | valorAportar |
+| :--- | :--- |
+| Ações | 1508.62 |
+| FIIs | 344.83 |
+| Renda Fixa | 146.55 |
+| Cripto | 0.00 |
+
+*(In this example, the 'Cripto' asset received no contribution, as it was already above its target percentage after calculating the new total value.)*
+
+
+## 🔧 How to Use With Your Data
+
+To use your own portfolio, open the `index.js` file and modify these two variables at the end of the file:
+
+```javascript
+// --- Example Usage ---
+
+// 1. Modify this variable with your assets
+const minhaCarteira = [
+    { nome: 'Ações', valorAtual: 8000, percentualObjetivo: 50 }, // 'Stocks'
+    { nome: 'FIIs', valorAtual: 5000, percentualObjetivo: 30 }, // 'REITs'
+    { nome: 'Renda Fixa', valorAtual: 4000, percentualObjetivo: 15 }, // 'Fixed Income'
+    { nome: 'Cripto', valorAtual: 3000, percentualObjetivo: 5 }, // 'Crypto'
+];
+
+// 2. Modify this variable with your contribution amount
+const meuAporte = 2000;
+
+// ... the rest of the code ...
+
+🧠 Calculation Logic
+The algorithm follows these steps:
+
+Calculate New Total: Sums the valorTotalAtual (Current Total Value) with the valorDoAporte (Contribution Amount).
+
+Identify Deficit: For each asset, it calculates its valorObjetivo (Target Value) (e.g., 50% of the new total). Then, it subtracts the valorAtual (Current Value) to find the "missing amount".
+
+Ignore Over-Allocated: If an asset has already exceeded its target (missing amount < 0), it is set to zero and will not receive any contribution.
+
+Calculate Proportion: The script sums all "missing amounts" (only from assets in deficit) to get a totalAFinanciar (Total to Finance).
+
+Distribute Contribution: The valorDoAporte is divided among the assets in deficit, proportional to the "weight" that each asset's "missing amount" has in the totalAFinanciar.
+
+📜 License
+Distributed under the MIT License. See the LICENSE file for more information.
