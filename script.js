@@ -1,4 +1,4 @@
-// --- YOUR CALCULATION FUNCTION (Copied directly, it works in the browser!) ---
+// --- CALCULATION FUNCTION ---
 
 function calcularRebalanceamentoComAporte(listaDeInvestimentos, valorDoAporte) {
     // Step 1: Calculate current total value
@@ -52,15 +52,14 @@ const minhaCarteira = [
 ];
 
 
-// --- "GLUE" CODE TO CONNECT HTML TO JAVASCRIPT ---
+// --- CODE TO CONNECT HTML TO JAVASCRIPT ---
 
-// 1. Get references to the HTML elements we need
+// 1. Get references to the HTML elements
 const inputElement = document.getElementById("aporte-value");
 const calculateButton = document.getElementById("calculate-btn");
 const resultsDiv = document.getElementById("results-container");
 
 // 2. Add an "event listener" to the button.
-//    This tells the button to run our 'handleCalculation' function when clicked.
 calculateButton.addEventListener("click", handleCalculation);
 
 // 3. This function runs when the button is clicked
@@ -71,10 +70,10 @@ function handleCalculation() {
     // 3.2. Simple validation
     if (isNaN(aporteValue) || aporteValue <= 0) {
         resultsDiv.innerHTML = "<p class='error'>Please enter a valid positive number.</p>";
-        return; // Stop the function here
+        return;
     }
 
-    // 3.3. CALL YOUR FUNCTION with the portfolio data and the user's input
+    // 3.3. CALL FUNCTION with the portfolio data and the user's input
     const suggestedAllocation = calcularRebalanceamentoComAporte(minhaCarteira, aporteValue);
 
     // 3.4. Display the results on the page
