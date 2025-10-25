@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Rebalancer</title>
     <link rel="stylesheet" href="style.css">
-
     </head>
 <body>
     <aside class="vertical-sidebar"> 
@@ -31,7 +30,7 @@
                     </figcaption>
                 </figure>
             </header>
-            <section class="sidebar__wrapper">
+                        <section class="sidebar__wrapper">
                 <ul class="sidebar__list list--primary">
                     <li class="sidebar__item item--heading">
                         <h2 class="sidebar__item--heading">general</h2>
@@ -62,22 +61,36 @@
         </nav>
     </aside>
     <main class="container">
-        <h1>Smart Rebalancer 📈</h1>
-        <p>Enter your investment amount to calculate the ideal allocation.</p>
+        <h1>Wallet 📈</h1>
+        <p>Register your investments.</p>
 
         <div class="form-group">
-            <span>Investment Amount ($):</span>
-            <input class="form-field" type="number" id="aporte-value" placeholder="e.g., 1000.00">
+            <span>Name</span>
+            <input class="form-field" type="text" placeholder="e.g., Stocks (US)">
         </div>
         <br>
-        
-        <button id="calculate-btn">Calculate Allocation</button>
+        <div class="form-group">
+            <span>Value</span>
+            <input class="form-field" type="email" placeholder="e.g., 1000.00">
+        </div>
+        <br>
+        <div class="form-group">
+            <span>Goal (%)</span>
+            <input class="form-field" type="email" placeholder="e.g., 50">
+        </div>
+        <br>
+        <div class="form-group">
+            <span>Change</span>
+            <input class="form-field" type="email" placeholder="e.g, USD">
+        </div>
+        <br>
 
-        <h2>Suggested Allocation:</h2>
-        <div id="results-container">
+        <button id="register-btn">Register Investment</button>
+
+        <h2>Investment List:</h2>
+        <div id="investment-list">
         </div>
     </main>
-
     <script src="script.js"></script>
 </body>
 </html>

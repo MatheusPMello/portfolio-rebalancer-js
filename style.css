@@ -1,28 +1,129 @@
-/* Import a clean font */
+/* ======================================================================== */
+/* 1. IMPORTS DE FONTES (DE AMBOS OS ARQUIVOS) */
+/* ======================================================================== */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-/* Basic setup */
+/* ======================================================================== */
+/* 2. RESETS E VARIÁVEIS (DA SIDEBAR) */
+/* ======================================================================== */
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+
+label,
+button {
+    cursor: pointer;
+}
+
+figure {
+    margin-inline: 0;
+    margin-block: 0.25rem;
+}
+
+/* NOTA: As regras de h1, h2, p abaixo são RESETS.
+  As regras do seu app (mais abaixo) irão sobrescrevê-las. 
+*/
+h1,
+h2,
+h3,
+h4,
+p {
+    margin: 0;
+    font-size: inherit;
+    line-height: 1.1;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+:root {
+    /* Cores de fundo (BGs) convertidas para cinza (saturação 0%) */
+    --bg--primary: hsl(0, 0%, 92%);
+    --bg--active: hsla(0, 0%, 78%, 0.7); /* Mudei para um cinza mais escuro que o hover para dar feedback */
+    --bg--hover: hsl(0, 0%, 84%);
+    --bg--focus: hsl(0, 0%, 100%); /* Branco */
+    
+    /* Cinzas (já eram desaturados, agora são 100% cinza) */
+    --gray--primary: hsl(0, 0%, 50%);
+    --gray--secondary: hsl(0, 0%, 30%);
+    
+    /* Escuros (agora são tons de carvão/cinza escuro) */
+    --dark--primary: hsl(0, 0%, 14%);
+    --dark--secondary: hsl(0, 0%, 29%);
+    
+    /* Acentos (re-mapeados para usar seus tons escuros, em vez de azul) */
+    --accent--primary: var(--dark--primary);
+    --accent--secondary: var(--gray--secondary);
+
+    /* Variáveis de tamanho (permanecem iguais) */
+    --expanded: 16.875rem;
+    --collapsed: 3.25rem;
+    --svg: 1.125rem;
+    --item: 2.25rem;
+    --brad-outer: 0.75rem;
+    --frame-space: 0.5rem;
+    --brad-inner: calc(var(--brad-outer) - var(--frame-space));
+
+    /* Cores de Inputs (convertidas de hex para HSL cinza) */
+    --input-color: hsl(0, 0%, 60%);       /* Original #99A3BA */
+    --input-border: hsl(0, 0%, 86%);      /* Original #CDD9ED */
+    --input-background: hsl(0, 0%, 100%); /* Original #fff */
+    --input-placeholder: hsl(0, 0%, 83%); /* Original #CBD1DC */
+
+    /* Foco (agora usa seu novo acento escuro) */
+    --input-border-focus: var(--accent--primary); /* Era azul #275EFE */
+
+    /* Cores de Grupo (convertidas e re-mapeadas) */
+    --group-color: var(--input-color);
+    --group-border: var(--input-border);
+    --group-background: hsl(0, 0%, 97%);  /* Original #EEF4FF */
+
+    --group-color-focus: #fff; /* Texto branco (mantido) */
+    --group-border-focus: var(--input-border-focus);
+    --group-background-focus: var(--dark--primary); /* Era azul #678EFE */
+}
+
+/* ======================================================================== */
+/* 3. LAYOUT PRINCIPAL (REGRA 'BODY' MESCLADA) */
+/* ======================================================================== */
 body {
+    /* Pegamos a fonte e o fundo do seu app original */
     font-family: 'Inter', sans-serif;
     background-color: #f0f2f5;
     color: #333;
+    
+    /* Usamos 'display: flex' para o layout lado-a-lado */
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
+    
+    /* Removemos padding, margin e centralização dos arquivos originais */
+    margin: 0;
+    padding: 0;
     min-height: 100vh;
+    box-sizing: border-box; 
 }
 
-/* The main content box */
+/* ======================================================================== */
+/* 4. ESTILOS DO APP ('.container' MODIFICADO) */
+/* ======================================================================== */
+
+/* O .container foi modificado para funcionar com o flexbox do body */
 .container {
     background-color: #ffffff;
     padding: 25px 30px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     width: 100%;
-    max-width: 450px;
+    
+    flex-grow: 1;
+    
+    margin: 20px; 
 }
 
+/* O restante dos estilos do seu app original */
 h1 {
     color: #1a2b48;
     text-align: center;
@@ -35,7 +136,6 @@ p {
     color: #555;
 }
 
-/* Input field styling */
 .input-group {
     margin-bottom: 20px;
 }
@@ -52,28 +152,33 @@ p {
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box; /* Important for padding to work correctly */
+    box-sizing: border-box;
 }
-
-/* Button styling */
-button {
+/* Estilo base para AMBOS os botões */
+button#calculate-btn,
+button#register-btn {
     width: 100%;
     padding: 12px;
     font-size: 16px;
     font-weight: bold;
-    color: #fff;
-    background-color: #007bff;
+    color: var(--bg--focus);
+    background-color: var(--dark--primary);
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, outline-color 0.2s;
+    outline-offset: 2px; 
+    outline: 2px solid transparent; 
 }
 
-button:hover {
-    background-color: #0056b3;
+button#calculate-btn:hover,
+button#calculate-btn:focus-visible,
+button#register-btn:hover,
+button#register-btn:focus-visible {
+    background-color: var(--dark--secondary);
+    outline-color: var(--gray--primary);
 }
 
-/* Results area */
 h2 {
     margin-top: 30px;
     border-bottom: 1px solid #eee;
@@ -93,4 +198,336 @@ h2 {
     color: #d93025;
     font-weight: bold;
     text-align: center;
+}
+
+
+/* ======================================================================== */
+/* 5. ESTILOS DA SIDEBAR */
+/* ======================================================================== */
+
+.vertical-sidebar {
+    display: flex;
+    inline-size: var(--expanded);
+    /* ADICIONADO: margem para se alinhar com o container */
+    margin-block: 20px; 
+    margin-left: 20px; /* Espaçamento à esquerda */
+}
+
+nav {
+    background: var(--bg--primary);
+    display: flex;
+    flex-flow: column;
+    min-width: var(--collapsed);
+    border-radius: var(--brad-outer);
+    flex: 0 0 auto;
+    transition: flex-basis 300ms ease-out;
+    will-change: flex-basis;
+    padding: var(--frame-space);
+    box-shadow: 0 3px 5px #1233, 0 5px 17px #0003;
+}
+
+.vertical-sidebar :checked ~ nav {
+    flex-basis: var(--expanded);
+}
+
+.vertical-sidebar :not(:checked) ~ nav {
+    flex-basis: var(--collapsed);
+}
+
+header {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.sidebar__toggle-container {
+    block-size: var(--item);
+    display: flex;
+    justify-content: end;
+}
+
+.nav__toggle {
+    block-size: 100%;
+    background: none;
+    transition: all 233ms ease-in;
+    border-radius: var(--brad-inner);
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+    overflow: hidden;
+}
+
+.toggle--icons {
+    block-size: inherit;
+    aspect-ratio: 1;
+    display: inline-grid;
+    place-content: center;
+    grid-template-areas: "svg";
+    z-index: 10;
+}
+
+.toggle-svg-icon {
+    grid-area: svg;
+    fill: var(--gray--primary);
+    transition: fill 233ms ease-in;
+}
+
+.nav__toggle:hover {
+    outline: 2px solid var(--accent--primary);
+}
+
+.toggle--icons:hover .toggle-svg-icon {
+    fill: var(--dark--primary);
+}
+
+figure {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    container-type: inline-size;
+    gap: 0.375rem;
+}
+
+.codepen-logo {
+    margin-inline: auto;
+    display: block;
+    min-inline-size: 2.25rem;
+    max-inline-size: 45cqi;
+    aspect-ratio: 1;
+    block-size: 100%;
+    object-fit: cover;
+    transition: width 100ms linear;
+}
+
+figcaption {
+    text-align: center;
+}
+
+.user-id {
+    font-size: 1.0625rem;
+    font-weight: 500;
+    margin-block-end: 0.25rem;
+    color: var(--gray--secondary);
+}
+
+.user-role {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--gray--primary);
+}
+
+.sidebar__wrapper {
+    --list-gap: 0.5rem;
+    display: flex;
+    flex-flow: column;
+    gap: var(--list-gap);
+}
+
+.sidebar__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-flow: column;
+    gap: 0.125rem;
+    overflow: hidden;
+}
+
+.sidebar__item {
+    block-size: var(--item);
+    border-radius: var(--brad-inner);
+}
+
+.item--heading {
+    display: flex;
+    align-items: end;
+}
+
+.sidebar__item--heading {
+    margin-block-end: 0.4rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    font-weight: 500;
+    color: var(--gray--primary);
+    transition: color 200ms ease-in;
+}
+
+.sidebar__list:has(.sidebar__link):hover .sidebar__item--heading {
+    color: var(--gray--secondary);
+}
+
+.sidebar__link {
+    display: flex;
+    text-decoration: none;
+    block-size: 100%;
+    align-items: center;
+    gap: 0.5rem;
+    outline: 2px solid transparent;
+    border-radius: inherit;
+}
+
+.icon {
+    aspect-ratio: 1;
+    block-size: 100%;
+    display: inline-grid;
+    svg {
+        place-self: center;
+        inline-size: var(--svg);
+        block-size: var(--svg);
+        fill: var(--gray--primary);
+    }
+}
+
+.text {
+    pointer-events: none;
+    color: var(--gray--secondary);
+    font-size: 0.875em;
+    font-weight: 500;
+    transition: color 266ms ease-out;
+}
+
+.sidebar__link:hover {
+    background: var(--bg--hover);
+    .icon svg {
+        fill: var(--accent--primary);
+    }
+    .text {
+        color: var(--dark--primary);
+    }
+}
+
+.sidebar__link:focus {
+    outline: 2px solid var(--accent--secondary);
+    outline-offset: -2px;
+    background: var(--bg--focus);
+    .icon svg {
+        fill: var(--accent--primary);
+    }
+}
+
+.sidebar__link:active {
+    background-color: var(--bg--active);
+}
+
+aside:not(:has(:checked)) .toggle--open,
+aside:has(:checked) .toggle--close {
+    opacity: 0;
+}
+
+aside:not(:has(:checked)) :where(figcaption, .item--heading) {
+    opacity: 0;
+}
+
+aside:has(:checked) :where(figcaption, .item--heading) {
+    transition: opacity 300ms ease-in 200ms;
+}
+
+[data-tooltip]::before {
+    content: attr(data-tooltip);
+    position: fixed;
+    translate: calc(var(--item) * 1.5) calc(var(--item) * 0.125);
+    border-radius: var(--brad-inner);
+    padding: 0.5rem 0.75rem;
+    color: #ddd;
+    background-color: hsl(198 16 30);
+    box-shadow: 0 6px 12px -6px #0003;
+    opacity: 0;
+    pointer-events: none;
+    scale: 0 0;
+    z-index: 999;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 350ms ease-out;
+}
+
+aside:not(:has(:checked))
+    .sidebar__link:where(:hover, :focus-visible)[data-tooltip]::before {
+    opacity: 1;
+    scale: 1;
+}
+
+.form-field {
+    display: block;
+    width: 100%;
+    padding: 8px 16px;
+    line-height: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    border-radius: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    color: var(--input-color);
+    border: 1px solid var(--input-border);
+    background: var(--input-background);
+    transition: border .3s ease;
+    &::placeholder {
+        color: var(--input-placeholder);
+    }
+    &:focus {
+        outline: none;
+        border-color: var(--input-border-focus);
+    }
+}
+
+.form-group {
+    position: relative;
+    display: flex;
+    width: 100%;
+    & > span,
+    .form-field {
+        white-space: nowrap;
+        display: block;
+        &:not(:first-child):not(:last-child) {
+            border-radius: 0;
+        }
+        &:first-child {
+            border-radius: 6px 0 0 6px;
+        }
+        &:last-child {
+            border-radius: 0 6px 6px 0;
+        }
+        &:not(:first-child) {
+            margin-left: -1px;
+        }
+    }
+    .form-field {
+        position: relative;
+        z-index: 1;
+        flex: 1 1 auto;
+        width: 1%;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    & > span {
+        text-align: center;
+        padding: 8px 12px;
+        font-size: 14px;
+        line-height: 25px;
+        color: var(--group-color);
+        background: var(--group-background);
+        border: 1px solid var(--group-border);
+        transition: background .3s ease, border .3s ease, color .3s ease;
+    }
+    &:focus-within {
+        & > span {
+            color: var(--group-color-focus);
+            background: var(--group-background-focus);
+            border-color: var(--group-border-focus);
+        }
+    }
+}
+
+html {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+* {
+    box-sizing: inherit;
+    &:before,
+    &:after {
+        box-sizing: inherit;
+    }
 }
