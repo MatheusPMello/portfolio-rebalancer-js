@@ -1,92 +1,83 @@
-# 📊 Portfolio Rebalancing Calculator with Contribution
+# 📊 AssetWise - Portfolio Rebalancer
 
-![JavaScript](https://img.shields.io/badge/JavaScript-ES6%2B-yellow?style=for-the-badge&logo=javascript)
-![Node.js](https://img.shields.io/badge/Node.js-14%2B-green?style=for-the-badge&logo=node.js)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white)
 
 ## 🎯 About The Project
 
-This is a simple JavaScript script that helps investors decide how to allocate a new financial contribution (deposit) to rebalance their investment portfolio.
+**AssetWise** is a full-stack web application designed to help investors rebalance their portfolios. It allows users to register their financial assets and then calculate the optimal allocation for a new contribution, prioritizing assets that are below their target percentage.
 
-The main goal is to use the contribution to buy assets that are furthest "behind" their target percentage, avoiding the need to sell assets (and potentially pay taxes or fees) to rebalance the portfolio.
+This approach helps in rebalancing without the need to sell assets, which can avoid taxes and fees.
 
 ## ✨ Features
 
-* Calculates the current total value and the new total value of the portfolio (with the contribution).
-* Identifies the amount needed for each asset to reach its target percentage.
-* Distributes the contribution proportionally **only** to the assets that are below their target.
-* Formats the allocation result to two decimal places.
+- **Asset Registration**: A dedicated "Wallet" page to add, and persist financial assets (description, amount, target %, currency) in a database.
+- **Rebalancing Calculator**: A calculator that takes a new contribution amount and suggests the best allocation to rebalance the portfolio.
+- **Client-Side Logic**: The calculation is performed instantly in the browser.
+- **REST API**: A backend service built with Node.js and Express to manage asset data.
+- **Database**: Uses Prisma ORM with an SQLite database to store portfolio information.
 
 ## 🚀 Tech Stack
 
-* **JavaScript (ES6+)**
-* **Node.js** (for local script execution)
+- **Frontend**:
+  - HTML5
+  - CSS3
+  - Vanilla JavaScript (ES6+)
+- **Backend**:
+  - Node.js
+  - Express.js
+  - Prisma (ORM)
+  - SQLite
+  - Cors
 
 ## ⚙️ Getting Started
 
-You will need [Node.js](https://nodejs.org/) installed on your machine.
+To run this project locally, you will need [Node.js](https://nodejs.org/) installed. Follow the steps below.
 
-1.  **Clone this repository:**
-    ```bash
-    git clone [https://github.com/YOUR-USERNAME/YOUR-PROJECT.git](https://github.com/YOUR-USERNAME/YOUR-PROJECT.git)
-    ```
-    (Replace `YOUR-USERNAME/YOUR-PROJECT` with your actual username and repository name)
+### 1. Clone the Repository
 
-2.  **Navigate to the project directory:**
-    ```bash
-    cd YOUR-PROJECT
-    ```
-
-3.  **Run the script:**
-    ```bash
-    node index.js
-    ```
-
-## 📋 Example Output
-
-When running the `index.js` script with the sample data, you will see this output in your terminal:
-| nomeInvestimento | valorAportar |
-| :--- | :--- |
-| Ações | 1508.62 |
-| FIIs | 344.83 |
-| Renda Fixa | 146.55 |
-| Cripto | 0.00 |
-
-*(In this example, the 'Cripto' asset received no contribution, as it was already above its target percentage after calculating the new total value.)*
-
-
-## 🔧 How to Use With Your Data
-
-To use your own portfolio, open the `index.js` file and modify these two variables at the end of the file:
-
-```javascript
-// --- Example Usage ---
-
-// 1. Modify this variable with your assets
-const minhaCarteira = [
-    { nome: 'Ações', valorAtual: 8000, percentualObjetivo: 50 }, // 'Stocks'
-    { nome: 'FIIs', valorAtual: 5000, percentualObjetivo: 30 }, // 'REITs'
-    { nome: 'Renda Fixa', valorAtual: 4000, percentualObjetivo: 15 }, // 'Fixed Income'
-    { nome: 'Cripto', valorAtual: 3000, percentualObjetivo: 5 }, // 'Crypto'
-];
-
-// 2. Modify this variable with your contribution amount
-const meuAporte = 2000;
-
-// ... the rest of the code ...
+```bash
+git clone https://github.com/your-username/portfolio-rebalancer-js.git
+cd portfolio-rebalancer-js
 ```
 
-## 🧠 Calculation Logic
-The algorithm follows these steps:
+### 2. Configure the Backend
 
-* Calculate New Total: Sums the valorTotalAtual (Current Total Value) with the valorDoAporte (Contribution Amount).
+Navigate to the backend directory, install dependencies, and set up the database.
 
-* Identify Deficit: For each asset, it calculates its valorObjetivo (Target Value) (e.g., 50% of the new total). Then, it subtracts the valorAtual (Current Value) to find the "missing amount".
+```bash
+# Go to the backend folder
+cd Backend
 
-* Ignore Over-Allocated: If an asset has already exceeded its target (missing amount < 0), it is set to zero and will not receive any contribution.
+# Install dependencies
+npm install
 
-* Calculate Proportion: The script sums all "missing amounts" (only from assets in deficit) to get a totalAFinanciar (Total to Finance).
+# Create and apply the database schema
+npx prisma migrate dev --name init
+```
 
-* Distribute Contribution: The valorDoAporte is divided among the assets in deficit, proportional to the "weight" that each asset's "missing amount" has in the totalAFinanciar.
+### 3. Run the Backend Server
+
+From the `Backend` directory, start the server:
+
+```bash
+# The server will run on http://localhost:3000
+npm start
+```
+
+### 4. Use the Application
+
+Open the frontend files directly in your web browser:
+
+- **Open `Frontend/wallet.html`**: To add your assets to the portfolio. The form on this page communicates with the backend.
+- **Open `Frontend/index.html`**: To use the rebalancing calculator. Enter a contribution amount and see the suggested allocation.
+
+> **Note**: The current version of the calculator in `index.html` uses a hardcoded portfolio for demonstration purposes and is not yet connected to the database. The asset registration in `wallet.html` works as expected.
 
 ## 📜 License
-Distributed under the MIT License. See the LICENSE file for more information.
+
+Distributed under the MIT License. See the `LICENSE` file for more information.
