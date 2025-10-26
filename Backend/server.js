@@ -48,7 +48,25 @@ app.post('/api/register-entry', async (req, res) => {
   }
 });
 
-// (Aqui você pode adicionar outros endpoints, ex: GET para ler os dados)
+//--- Endpoint to GET all entries ---
+app.get('/api/get-entries', async (req, res) => {
+  try {
+    // 1. Fetch all entries from the database using Prisma
+    const allEntries = await prisma.financialEntry.findMany({
+      // 2. Order them so the newest ones are first
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+
+    // 3. Send the list back to the frontend as JSON
+    res.status(200).json(allEntries);
+
+  } catch (error) {
+    console.error('Error fetching entries:', error);
+    res.status(500).json({ error: 'Failed to fetch entries.' });
+  }
+});
 
 // 4. Start the server
 const PORT = process.env.PORT || 3000;
