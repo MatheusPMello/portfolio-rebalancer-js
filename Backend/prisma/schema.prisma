@@ -1,0 +1,24 @@
+// prisma/schema.prisma
+
+// 1. Configuração do Cliente
+generator client {
+  provider = "prisma-client-js"
+}
+
+// 2. Configuração do Banco de Dados
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// 3. Nossos Modelos de Dados
+
+// Modelo para o registro financeiro
+model FinancialEntry {
+  id          Int      @id @default(autoincrement())
+  description String
+  amount      Decimal
+  target      Int
+  currency    String
+  createdAt   DateTime @default(now())
+}

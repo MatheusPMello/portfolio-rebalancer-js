@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       // Send the data to the backend API endpoint
-      const response = await fetch('/api/register-entry', {
+      const response = await fetch('http://localhost:3000/api/register-entry', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json', // Tell the server we are sending JSON
