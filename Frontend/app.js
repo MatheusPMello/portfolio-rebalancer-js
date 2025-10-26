@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const data = Object.fromEntries(formData.entries());
 
     data.amount = parseFloat(data.amount);
-    data.target = parseInt(data.target, 10);
+    data.target = parseInt(data.target);
     if (data.currency) {
       data.currency = data.currency.toUpperCase();
     }
