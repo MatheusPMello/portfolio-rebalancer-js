@@ -1,5 +1,3 @@
-// server.js (Tudo em Inglês, como solicitado)
-
 // 1. Import dependencies
 const express = require('express');
 const { PrismaClient } = require('@prisma/client');
@@ -10,13 +8,13 @@ const app = express();
 const prisma = new PrismaClient();
 
 // 3. Middleware
-// This is crucial: it parses incoming JSON from the frontend
+// It parses incoming JSON from the frontend
 app.use(express.json());
 app.use(cors());
 
 // --- API Endpoints ---
 
-// Nosso novo endpoint para registrar o FinancialEntry
+// New endpoint to register FinancialEntry
 app.post('/api/register-entry', async (req, res) => {
   // Get data from the request body (sent by the frontend 'fetch')
   const { description, amount, target, currency } = req.body;
